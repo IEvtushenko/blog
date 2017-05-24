@@ -1,0 +1,16 @@
+AddDefaultCharset utf-8
+
+RewriteEngine on
+
+#RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+
+Redirect 301 /facebook.com http://facebook.com
+Redirect 301 /twitter.com http://twitter.com
+Redirect 301 /google.com http://google.com
+Redirect 301 /linkedin.com http://www.linkedin.com
+
+RewriteRule ^.*$ index.php [L]
