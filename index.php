@@ -5,7 +5,8 @@ require __DIR__ . "/autoload.php";
 require __DIR__ . "/vendor/autoload.php";
 //require_once __DIR__ . '/vendor/twig/lib/Twig/Autoloader.php';
 
-spl_autoload_register('standartAutoload');
+spl_autoload_register('standartAutoload');//todo-vanya это дубликат
+
 
 define('ROOT', dirname(__FILE__));
 

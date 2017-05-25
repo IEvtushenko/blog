@@ -282,33 +282,18 @@ class News extends Model
      * Сохраняет изображение для статей
      * @param $array Изображение
      */
+
     public function saveImg($image)
     {
 
         if (isset($this->id)) {
-            $filenameB = ROOT . '/templates/img/big/' . $this->id . ".jpg";
-            $filenameS = ROOT . '/templates/img/small/' . $this->id . ".jpg";
-            $filenameR = ROOT . '/templates/img/recommended/' . $this->id . ".jpg";
-
-            $new_image = new Image($image);
-
-            $new_image->autoimageresize(500, 350);
-            $new_image->imagesave($new_image->image_type, $filenameB);
-
-            $new_image->autoimageresize(150, 80);
-            $new_image->imagesave($new_image->image_type, $filenameR);
-
-            $new_image->autoimageresize(60, 60);
-            $new_image->imagesave($new_image->image_type, $filenameS);
-
-            $new_image->imageout();
-
-
+            $img = new Image($this->id);
+            $img->saveImg($image);
 
         } else {
             return;
         }
-    }
+  }
 
     public static function getRecommended()
     {

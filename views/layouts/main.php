@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="featured-image">
-                    <img width="290" height="130" src="/templates/img/big/{{ single.id }}.jpg"/>
+                    <img width="290" height="130" src="/templates/img/recommended/{{ single.id }}.jpg"/>
                     <div class="post-icon">
                     <span class="fa-stack fa-lg">
                         <i class="fa fa-circle fa-stack-2x"></i>

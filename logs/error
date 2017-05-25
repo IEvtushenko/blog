@@ -1,0 +1,2 @@
+[2017-05-25 20:21:49] exceptions.ERROR: Fatal Error {"exception":"[object] (App\\Exceptions\\Db(code: 0): Метод Query не доступен at C:\\OpenServer\\domains\\localhost\\php\\php2\\app\\Db.php:57)"} []
+[2017-05-25 20:22:26] exceptions.ERROR: Fatal Error {"exception":"[object] (App\\Exceptions\\Db(code: 0): Метод Query не доступен at C:\\OpenServer\\domains\\localhost\\php\\php2\\app\\Db.php:57)"} []
