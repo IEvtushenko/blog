@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block carousel %}
-{{ parent() }}
+
 {% endblock %}
 
 {% block main %}
@@ -40,7 +40,7 @@
                     <div class="clear"></div>
                 </div>
 
-                <div class="featured-image">
+                <div class="featured-image" >
                     <img src="/templates/img/big/{{ singleNews.id }}.jpg"
                          class="attachment-post-standard "
                          data-action="zoom"
@@ -97,7 +97,7 @@
             {% autoescape false %}
             {{ pagination }}
             {% endautoescape %}
-
+            <!-- End Pagination -->
 
             <div class="clear"></div>
         </div>

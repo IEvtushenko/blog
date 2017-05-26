@@ -85,7 +85,7 @@ abstract class Model
 
     public function delete($id)
     {
-        $sql = "DELETE FROM " . static::TABLE . " WHERE id = :id";
+        $sql = "DELETE FROM news WHERE id = :id";
         $db = Db::instance();
 //        $db->execute($sql, array(":id" => $id));
         if ($db->execute($sql, array(":id" => $id))) {
@@ -119,7 +119,19 @@ abstract class Model
         return $db->lastId();
     }
 
+    public static function search($string)
+    {
+        $str = '%'. $string . '%';
+        $sql = "SELECT * FROM `news` WHERE content LIKE ? ORDER BY id DESC";
+        $db = Db::instance();
+        return $db->query($sql, [$str], static::class);
+    }
 
-    
-
+    public static function getTotalSearch($string)
+    {
+        $str = '%'. $string . '%';
+        $sql = "SELECT COUNT(id) as count FROM `news` WHERE content LIKE ? ORDER BY id DESC";
+        $db = Db::instance();
+        return $db->query($sql, [$str], static::class);
+    }
 }

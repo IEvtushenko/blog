@@ -2,13 +2,16 @@
 <div class="col-1-3">
     <div class="wrap-col">
         <div class="widget-container">
-            <form role="search" method="get" id="searchform" class="searchform" action="">
+            <form role="search" method="get" id="searchform" class="searchform" action="search">
                 <div>
                     <label class="screen-reader-text" for="s">Search for:</label>
                     <input type="text" value="" name="s" id="s"/>
                     <input type="submit" id="searchsubmit" value="Поиск"/>
                 </div>
             </form>
+            {% if message is not empty %}
+            <span><i class="fa-stack fa-lg"></i> Ничего не найдено </span>
+            {% endif %}
             <div class="clear"></div>
         </div>
         <div class="widget-container"><h6 class="widget-title">Категории</h6>
