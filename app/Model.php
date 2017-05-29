@@ -38,12 +38,13 @@ abstract class Model
         $columns = [];
         $values = [];
         foreach ($this as $k => $v) {
-            if (('id' == $k) || ('data' == $k)) {
+            if (('id' == $k) || ('data' == $k) || ('date' == $k) || ('public' == $k)) {
                 continue;
             }
             $columns[] = $k;
             $values[':' . $k] = $v;
         }
+
         $sql = 'INSERT INTO ' . static::TABLE . ' (' . implode(',', $columns) . ') VALUES (' . implode(',', array_keys($values)) . ')';
 
         $db = Db::instance();

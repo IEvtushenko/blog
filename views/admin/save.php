@@ -43,9 +43,9 @@
                             <p class="comment-notes"></p>
                             <input type="text" name="title" placeholder="Введите заголовок" class="comment-name"
                                    value=""/>
-                            <input type="text" name="short_title" placeholder="Введите краткий заголовок"
+                            <input type="text" name="short_title" maxlength="25" placeholder="Введите краткий заголовок"
                                    class="comment-name"
-                                   value=""/>
+                                   value="" title="Не более 25 символов"/>
                             <input type="text" name="short_content" placeholder="Введите краткое описание"
                                    class="comment-email" value=""/>
 

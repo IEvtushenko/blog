@@ -98,7 +98,8 @@
             </div>
             <!-- End Post Item -->
 
-
+            <!--            {% if comments is not empty %}-->
+            {% for comment in comments %}
             <div class="post">
                 <div class="post-margin">
 
@@ -110,10 +111,11 @@
                             <img width="70" height="70" src="/templates/img/one-more-beer-70x70.png"
                                  class="attachment-post-widget #"/></div>
 
+
                         <div class="related-posts-aligned">
-                            <h6>Мой первый коммент</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet auctor
-                                ligula. Donec eu</p>
+                            <h6>{{ comment.name }}</h6>
+
+                            <p>{{ comment.comment }}</p>
                             <div class="clear"></div>
                         </div>
 
@@ -125,15 +127,16 @@
                     <div class="clear"></div>
                 </div>
             </div>
+            {% endfor %}
+            <!--            {% endif %}-->
 
             <!-- Comments -->
             <div class="comment-container">
-
+                {% if comments is empty %}
                 <h6 id="comment-header">Нет комментариев, будь первым!</h6>
-
+                {% endif %}
                 <ul class="comment-list">
                 </ul>
-
 
                 <!-- Comment Form -->
                 <div class="commen-form">
@@ -142,19 +145,26 @@
                             <small><a rel="nofollow" id="cancel-comment-reply-link" href="#" style="display:none;">Cancel
                                     Reply</a></small>
                         </h3>
-                        <form action="" method="post" id="comment-form-container" class="comment-form">
-                            <p class="comment-notes"></p>                            <input type="text"
-                                                                                            name="author"
-                                                                                            placeholder="Введите имя"
-                                                                                            class="comment-name"/>
-                            <input type="text" name="email" placeholder="Введите Email" class="comment-email"/>
+
+                        <form action="" method="post" id="comment-form-container" name="form"
+                              class="comment-form">
+                            <p class="comment-notes"></p>
+                            <input type="text"
+                                   name="name"
+                                   placeholder="Введите имя"
+                                   class="comment-name"
+                                   required/>
+                            <input type="text" name="email" placeholder="Введите Email" class="comment-email"
+                                   required/>
                                 <textarea name="comment" placeholder="Оставьте сообщение"
-                                          class="comment-text-area"></textarea>
+                                          class="comment-text-area"
+                                          required></textarea>
                             <p class="form-allowed-tags"></p>
                             <p class="form-submit">
                                 <input name="submit" type="submit" id="comment-submit" value="Отправить"/>
-                                <input type='hidden' name='comment_post_ID' value='49' id='comment_post_ID'/>
-                                <input type='hidden' name='comment_parent' id='comment_parent' value='0'/>
+                                <input type='hidden' name='article_id' value='{{ article.id }}'
+                                       id='{{ article.id }}'/>
+                                <!--                                <input type='hidden' name='comment_parent' id='comment_parent' value='0'/>-->
                             </p>
                         </form>
                     </div><!-- #respond -->
@@ -172,10 +182,77 @@
     </div>
     <!-- End Posts Container -->
     {% block sidebar %}
-    {% include '/layouts/sidebar.php' %}
+    <!-- Start Sidebar -->
+    <div class="col-1-3">
+        <div class="wrap-col">
+            <div class="widget-container">
+                <form role="search" method="get" id="searchform" class="searchform" action="search">
+                    <div>
+                        <label class="screen-reader-text" for="s">Search for:</label>
+                        <input type="text" value="" name="s" id="s"/>
+                        <input type="submit" id="searchsubmit" value="Поиск"/>
+                    </div>
+                </form>
+                {% if message is not empty %}
+                <span><i class="fa-stack fa-lg"></i> Ничего не найдено </span>
+                {% endif %}
+                <div class="clear"></div>
+            </div>
+            <div class="widget-container"><h6 class="widget-title">Категории</h6>
+                <ul>
+                    {% for category in categories %}
+                    <li class="cat-item cat-item-5"><a href="/category?id={{ category.id }}"
+                                                       title="View all posts filed under Apps">{{ category.name }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <div class="clear"></div>
+            </div>
+            <div class="widget-container"><h6 class="widget-title">Последние записи</h6>    <!-- Start Widget -->
+                <ul class="widget-recent-posts">
+                    {% for singleLastNews in lastNews %}
+                    <li>
+                        <div class="post-image">
+                            <div class="post-mask"></div>
+                            <img width="70" height="70" src="/templates/img/small/{{ singleLastNews.id }}.jpg"
+                                 class="attachment-post-widget sidebar-img"/>
+                        </div>
+                        <div>
+                            <h6><a href="article?id={{ singleLastNews.id }}">{{ singleLastNews.short_title }}</a></h6>
+                            <span>{{ singleLastNews.date|date("d-m-Y") }}</span>
+                        </div>
+
+                        <div class="clear"></div>
+                    </li>
+                    {% endfor %}
+
+                </ul>
+                <!-- End Widget -->
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>        <!-- End Sidebar -->
     {% endblock %}
 
     <div class="clear"></div>
+    <script>
+        $(document).ready(function() {
+
+            $("#comment-form-container").submit(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "/comments/create",
+                    data: $(this).serialize(),
+                    success:function (data) {//возвращаемый результат от сервера
+                        console.log("Успех");
+                    }
+                });
+
+            });
+
+        });
+    </script>
 </div>
 <!-- End Main Container -->
 {% endblock %}

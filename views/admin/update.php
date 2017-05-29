@@ -42,9 +42,9 @@
                             <p class="comment-notes"></p>
                             <input type="text" name="title" placeholder="Введите заголовок" class="comment-name"
                                    value="{{ article.title }}"/>
-                            <input type="text" name="short_title" placeholder="Введите краткий заголовок"
+                            <input type="text" name="short_title" maxlength="25" placeholder="Введите краткий заголовок"
                                    class="comment-name" value="{{ article.short_title }}"
-                                   value=""/>
+                                   value="" title="Не более 25 символов"/>
                             <input type="text" name="short_content" placeholder="Введите краткое описание"
                                    class="comment-email" value="{{ article.short_content }}"/>
                             <p class="comment-notes">Текст статьи</p>

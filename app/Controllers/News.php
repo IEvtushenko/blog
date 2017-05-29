@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers;
+use App\Models\Comments;
 use App\MultiException;
 use App\Pagination;
 
@@ -53,6 +54,9 @@ class News
 
         $id = (int)$_GET['id'];
         $this->view->article = \App\Models\News::findById($id)[0];
+        $this->view->comments = \App\Models\Comments::findByArticleId($id);
+//        var_dump($this->view->comments);
+//        die;
 
         $categoryName = $this->view->article->category->name;
 
@@ -70,6 +74,7 @@ class News
             'article' => $this->view->article,
             'categories' => $this->view->categories,
             'time' => $this->view->time,
+            'comments' => $this->view->comments,
             'memory' => $this->view->memory]);
     }
 
